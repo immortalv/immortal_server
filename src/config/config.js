@@ -30,7 +30,7 @@ module.exports = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   mongoose: {
-    url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
+    url: `mongodb+srv://${envVars.MONGO_DB_USER}:${envVars.MONGO_DB_PASSWORD}@${envVars.MONGODB_URL}?retryWrites=true&w=majority`,
     options: {
       useCreateIndex: true,
       useNewUrlParser: true,
@@ -45,13 +45,11 @@ module.exports = {
   },
   email: {
     smtp: {
-      host: envVars.SMTP_HOST,
-      port: envVars.SMTP_PORT,
+      service: 'gmail',
       auth: {
-        user: envVars.SMTP_USERNAME,
-        pass: envVars.SMTP_PASSWORD,
+        user: process.env.USER_EMAIL,
+        pass: process.env.USER_PASSWORD,
       },
     },
-    from: envVars.EMAIL_FROM,
   },
 };
