@@ -9,6 +9,7 @@ router.post('/register', validate(authValidation.register), authController.regis
 router.post('/login', validate(authValidation.login), authController.login);
 router.post('/logout', validate(authValidation.logout), authController.logout);
 router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
+router.post('/verify-user', validate(authValidation.verifyUser), authController.verifyUser);
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);
 router.post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword);
 
@@ -248,4 +249,40 @@ module.exports = router;
  *              example:
  *                code: 401
  *                message: Password reset failed
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /auth/verify-user:
+ *    post:
+ *      summary: Verify user
+ *      tags: [Auth]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - password
+ *              properties:
+ *                verifyToken:
+ *                  type: string
+ *                  format: token
+ *                  description: Verify token
+ *              example:
+ *                verifyToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MDE4ZjY0ZDQxMDY1NTYyMGM2M2VjZjkiLCJpYXQiOjE2MTIyNDg2NTMsImV4cCI6MTYxMjQ2NDY1MywidHlwZSI6InZlcmlmeSJ9.nDdQTJva9pkAtZNGE4eZ8cyBxEHzeOkQfQm5r0z-X8o
+ *      responses:
+ *        "204":
+ *          description: No content
+ *        "400":
+ *          description: Verify user failed
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ *              example:
+ *                code: 400
+ *                message: Verify user failed
  */

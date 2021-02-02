@@ -39,8 +39,18 @@ const sendResetPasswordEmail = async (to, token) => {
   await sendEmail(to, subject, text);
 };
 
+const sendUserVerifyEmail = async (to, token) => {
+  const subject = 'Verify account';
+  const verifyUserUrl = `http://link-to-app/verify-user?token=${token}`;
+  const text = `Dear user,
+  To verify your account, click on this link: ${verifyUserUrl}
+  If you did not register on ${`http://link-to-app`}, then ignore this email.`;
+  await sendEmail(to, subject, text);
+};
+
 module.exports = {
   transport,
   sendEmail,
   sendResetPasswordEmail,
+  sendUserVerifyEmail,
 };

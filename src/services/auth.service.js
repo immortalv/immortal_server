@@ -71,9 +71,30 @@ const resetPassword = async (resetPasswordToken, newPassword) => {
   }
 };
 
+/**
+ * Verify user
+ * @param {string} verifyToken
+ * @returns {Promise}
+ */
+const verifyUser = async (verifyToken) => {
+  try {
+    const verifyTokenDoc = await tokenService.verifyToken(verifyToken, tokenTypes.VERIFY);
+    const user = await userService.getUserById(verifyTokenDoc.user);
+    if (!user) {
+      throw new Error();
+    }
+    await userService.updateUserById(user.id, { isVerified: true });
+    await verifyTokenDoc.remove();
+  } catch (error) {
+    console.log('Error', error);
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Verify user failed');
+  }
+};
+
 module.exports = {
   loginUserWithEmailAndPassword,
   logout,
   refreshAuth,
   resetPassword,
+  verifyUser,
 };
