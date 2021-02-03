@@ -1,0 +1,21 @@
+{
+  "family": "immortal-server",
+  "executionRoleArn": "arn:aws:iam::772919269280:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "immortal-server",
+      "image": "772919269280.dkr.ecr.us-east-2.amazonaws.com/immortal-server:latest",
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true
+    }
+  ],
+  "cpu": "512",
+  "memory": "1024"
+}
