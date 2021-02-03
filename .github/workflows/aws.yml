@@ -38,9 +38,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    run: |
-      type ${{ secrets }}
-
     - name: Checkout
       uses: actions/checkout@v2
 
