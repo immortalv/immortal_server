@@ -1,11 +1,11 @@
 {
-  "family": "immortal-server",
+  "family": "immortal-server-f",
   "executionRoleArn": "arn:aws:iam::772919269280:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
   "containerDefinitions": [
     {
-      "name": "immortal-server",
-      "image": "772919269280.dkr.ecr.us-east-2.amazonaws.com/immortal-server:latest",
+      "name": "immortal-server-f",
+      "image": "772919269280.dkr.ecr.us-east-2.amazonaws.com/immortal-server-f:latest",
       "portMappings": [
         {
           "hostPort": 3000,
@@ -17,6 +17,6 @@
     }
   ],
   "cpu": "512",
-  "memory": "983",
+  "memory": "1024",
   "requiresCompatibilities": ["FARGATE"]
 }
