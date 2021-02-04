@@ -17,5 +17,6 @@
     }
   ],
   "cpu": "512",
-  "memory": "983"
+  "memory": "983",
+  "requiresCompatibilities": ["EC2"]
 }
