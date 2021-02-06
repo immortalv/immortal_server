@@ -31,7 +31,7 @@ if (error) {
 
 module.exports = {
   env: envVars.NODE_ENV,
-  port: envVars.PORT,
+  port: envVars.PORT || 8081,
   mongoose: {
     url: `mongodb+srv://${envVars.MONGO_USERNAME}:${envVars.MONGO_PASSWORD}@${envVars.MONGO_URL}/${envVars.MONGO_DB}?retryWrites=true&w=majority`,
     options: {
