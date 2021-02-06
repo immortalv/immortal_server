@@ -8,7 +8,10 @@ const envVarsSchema = Joi.object()
   .keys({
     NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
     PORT: Joi.number().default(3000),
-    MONGODB_URL: Joi.string().required().description('Mongo DB url'),
+    MONGO_URL: Joi.string().required().description('Mongo DB url'),
+    MONGO_DB: Joi.string().required().description('Mongo DB name'),
+    MONGO_USERNAME: Joi.string().required().description('Mongo DB user name'),
+    MONGO_PASSWORD: Joi.string().required().description('Mongo DB password'),
     JWT_SECRET: Joi.string().required().description('JWT secret key'),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number().default(30).description('minutes after which access tokens expire'),
     JWT_REFRESH_EXPIRATION_DAYS: Joi.number().default(30).description('days after which refresh tokens expire'),
@@ -30,7 +33,7 @@ module.exports = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   mongoose: {
-    url: `mongodb+srv://${envVars.MONGO_DB_USER}:${envVars.MONGO_DB_PASSWORD}@${envVars.MONGODB_URL}?retryWrites=true&w=majority`,
+    url: `mongodb+srv://${envVars.MONGO_USERNAME}:${envVars.MONGO_PASSWORD}@${envVars.MONGO_URL}/${envVars.MONGO_DB}?retryWrites=true&w=majority`,
     options: {
       useCreateIndex: true,
       useNewUrlParser: true,
