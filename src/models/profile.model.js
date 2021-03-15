@@ -1,22 +1,12 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
-const { roles } = require('../config/roles');
 const { profileTypes, profilTemplates } = require('../config/profile');
 
 const profileSchema = mongoose.Schema(
   {
-    firstName: {
+    name: {
       type: String,
       required: true,
-      trim: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    surName: {
-      type: String,
       trim: true,
     },
     description: {
@@ -48,7 +38,7 @@ const profileSchema = mongoose.Schema(
     template: {
       type: String,
       enum: profilTemplates,
-      default: 'public',
+      default: 'simple',
     },
     mainPhoto: {
       type: String,
@@ -56,26 +46,11 @@ const profileSchema = mongoose.Schema(
     coverPhoto: {
       type: String,
     },
-    otherPhotos: [
+    media: [
       {
         type: String,
       },
     ],
-    video: [
-      {
-        type: String,
-      },
-    ],
-    audio: [
-      {
-        type: String,
-      },
-    ],
-    role: {
-      type: String,
-      enum: roles,
-      default: 'user',
-    },
   },
   {
     timestamps: true,
