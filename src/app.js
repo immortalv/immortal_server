@@ -4,7 +4,9 @@ const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const passport = require('passport');
+const session = require('express-session');
 const httpStatus = require('http-status');
 const config = require('./config/config');
 const morgan = require('./config/morgan');
@@ -37,12 +39,18 @@ app.use(mongoSanitize());
 // gzip compression
 app.use(compression());
 
+// Parse cookies
+app.use(cookieParser());
+
 // enable cors
 app.use(cors());
 app.options('*', cors());
 
+app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }));
+
 // jwt authentication
 app.use(passport.initialize());
+app.use(passport.session());
 passport.use('jwt', jwtStrategy);
 
 // limit repeated failed requests to auth endpoints
