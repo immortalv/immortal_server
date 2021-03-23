@@ -5,7 +5,9 @@ const { profileController } = require('../../controllers');
 
 const router = express.Router();
 
+// Add auth check middlewares
 router.post('/', validate(profileValidation.createProfile), profileController.createProfile);
+router.get('/', profileController.getUserProfiles);
 
 module.exports = router;
 

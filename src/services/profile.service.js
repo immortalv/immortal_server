@@ -10,6 +10,12 @@ const createProfile = async (profileBody) => {
   return profile;
 };
 
+const getProfiles = async (user) => {
+  const profiles = await Profile.find({ user });
+  return profiles;
+};
+
 module.exports = {
   createProfile,
+  getProfiles,
 };
