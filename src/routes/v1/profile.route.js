@@ -1,13 +1,14 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
+const { checkJwt } = require('../../middlewares/jwt-auth');
 const profileValidation = require('../../validations');
 const { profileController } = require('../../controllers');
 
 const router = express.Router();
 
 // Add auth check middlewares
-router.post('/', validate(profileValidation.createProfile), profileController.createProfile);
-router.get('/', profileController.getUserProfiles);
+router.post('/', checkJwt, validate(profileValidation.createProfile), profileController.createProfile);
+router.get('/', checkJwt, profileController.getUserProfiles);
 
 module.exports = router;
 

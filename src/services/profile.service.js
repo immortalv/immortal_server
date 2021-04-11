@@ -10,8 +10,8 @@ const createProfile = async (profileBody) => {
   return profile;
 };
 
-const getProfiles = async (user) => {
-  const profiles = await Profile.find({ user });
+const getProfiles = async (userId) => {
+  const profiles = await Profile.find({ userId });
   return profiles;
 };
 
