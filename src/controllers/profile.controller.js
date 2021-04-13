@@ -14,7 +14,14 @@ const getUserProfiles = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(profiles);
 });
 
+const getUserProfile = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const profiles = await profileService.getProfile(id);
+  res.status(httpStatus.OK).send(profiles);
+});
+
 module.exports = {
   createProfile,
   getUserProfiles,
+  getUserProfile,
 };

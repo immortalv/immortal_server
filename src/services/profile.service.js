@@ -15,7 +15,13 @@ const getProfiles = async (userId) => {
   return profiles;
 };
 
+const getProfile = async (id) => {
+  const profile = await Profile.findById(id);
+  return profile;
+};
+
 module.exports = {
   createProfile,
   getProfiles,
+  getProfile,
 };

@@ -9,6 +9,7 @@ const router = express.Router();
 // Add auth check middlewares
 router.post('/', checkJwt, validate(profileValidation.createProfile), profileController.createProfile);
 router.get('/', checkJwt, profileController.getUserProfiles);
+router.get('/:id', checkJwt, profileController.getUserProfile);
 
 module.exports = router;
 
