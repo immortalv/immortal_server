@@ -46,16 +46,25 @@ const profileSchema = mongoose.Schema(
     coverPhoto: {
       type: String,
     },
-    media: [
+    otherPhotos: [
       {
         type: String,
       },
     ],
-    user: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'User',
+    otherFiles: [
+      {
+        type: String,
+      },
+    ],
+    userId: {
+      type: String,
       required: true,
     },
+    // user: {
+    //   type: mongoose.SchemaTypes.ObjectId,
+    //   ref: 'User',
+    //   required: true,
+    // },
   },
   {
     timestamps: true,
