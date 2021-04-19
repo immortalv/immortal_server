@@ -46,7 +46,12 @@ const profileSchema = mongoose.Schema(
     coverPhoto: {
       type: String,
     },
-    media: [
+    otherPhotos: [
+      {
+        type: String,
+      },
+    ],
+    otherFiles: [
       {
         type: String,
       },
