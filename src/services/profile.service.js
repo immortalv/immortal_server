@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const { Profile } = require('../models');
+const { getDifference } = require('../utils/array');
 
 /**
  * Create a profile
@@ -38,9 +39,18 @@ const updateProfileById = async (userId, updateBody) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
 
+  let filesToDelete = [];
+  if (profile.mainPhoto.id !== updateBody.mainPhoto.id) {
+    filesToDelete.push(profile.mainPhoto.key);
+  }
+
+  const photosToDelete = getDifference(updateBody.otherPhotos, profile.otherPhotos);
+  const otherFilesToDelete = getDifference(updateBody.otherFiles, profile.otherFiles);
+  filesToDelete = [...filesToDelete, ...photosToDelete, ...otherFilesToDelete];
+
   Object.assign(profile, updateBody);
   await profile.save();
-  return profile;
+  return { profile, filesToDelete };
 };
 
 /**
