@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { objectId } = require('./custom.validation');
 
 const createProfile = {
   body: Joi.object().keys({
@@ -19,31 +20,27 @@ const createProfile = {
 //   }),
 // };
 
-// const getUser = {
-//   params: Joi.object().keys({
-//     userId: Joi.string().custom(objectId),
-//   }),
-// };
+const getProfile = {
+  params: Joi.object().keys({
+    id: Joi.string().custom(objectId),
+  }),
+};
 
-// const updateUser = {
-//   params: Joi.object().keys({
-//     userId: Joi.required().custom(objectId),
-//   }),
-//   body: Joi.object()
-//     .keys({
-//       email: Joi.string().email(),
-//       password: Joi.string().custom(password),
-//       name: Joi.string(),
-//     })
-//     .min(1),
-// };
+const updateProfile = {
+  params: Joi.object().keys({
+    id: Joi.required().custom(objectId),
+  }),
+};
 
-// const deleteUser = {
-//   params: Joi.object().keys({
-//     userId: Joi.string().custom(objectId),
-//   }),
-// };
+const deleteProfile = {
+  params: Joi.object().keys({
+    id: Joi.string().custom(objectId),
+  }),
+};
 
 module.exports = {
   createProfile,
+  getProfile,
+  updateProfile,
+  deleteProfile,
 };

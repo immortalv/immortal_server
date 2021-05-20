@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 const { profileTypes, profilTemplates } = require('../config/profile');
+const { profileFileSchema } = require('./profile-file.model');
 
 const profileSchema = mongoose.Schema(
   {
@@ -40,31 +41,14 @@ const profileSchema = mongoose.Schema(
       enum: profilTemplates,
       default: 'simple',
     },
-    mainPhoto: {
-      type: String,
-    },
-    coverPhoto: {
-      type: String,
-    },
-    otherPhotos: [
-      {
-        type: String,
-      },
-    ],
-    otherFiles: [
-      {
-        type: String,
-      },
-    ],
+    mainPhoto: profileFileSchema,
+    coverPhoto: profileFileSchema,
+    otherPhotos: [profileFileSchema],
+    otherFiles: [profileFileSchema],
     userId: {
       type: String,
       required: true,
     },
-    // user: {
-    //   type: mongoose.SchemaTypes.ObjectId,
-    //   ref: 'User',
-    //   required: true,
-    // },
   },
   {
     timestamps: true,

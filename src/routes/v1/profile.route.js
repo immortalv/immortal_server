@@ -6,10 +6,16 @@ const { profileController } = require('../../controllers');
 
 const router = express.Router();
 
-// Add auth check middlewares
-router.post('/', checkJwt, validate(profileValidation.createProfile), profileController.createProfile);
-router.get('/', checkJwt, profileController.getUserProfiles);
-router.get('/:id', checkJwt, profileController.getUserProfile);
+router
+  .route('/')
+  .post(checkJwt, validate(profileController.createProfile), profileController.createProfile)
+  .get(checkJwt, profileController.getUserProfiles);
+
+router
+  .route('/:id')
+  .get(checkJwt, validate(profileValidation.getProfile), profileController.getProfile)
+  .patch(checkJwt, validate(profileValidation.updateProfile), profileController.updateProfile)
+  .delete(checkJwt, validate(profileValidation.deleteProfile), profileController.deleteProfile);
 
 module.exports = router;
 
