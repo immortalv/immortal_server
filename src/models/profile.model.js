@@ -42,7 +42,6 @@ const profileSchema = mongoose.Schema(
       default: 'simple',
     },
     mainPhoto: profileFileSchema,
-    coverPhoto: profileFileSchema,
     otherPhotos: [profileFileSchema],
     otherFiles: [profileFileSchema],
     userId: {
