@@ -40,7 +40,7 @@ const updateProfileById = async (userId, updateBody) => {
   }
 
   let filesToDelete = [];
-  if (profile.mainPhoto.id !== updateBody.mainPhoto.id) {
+  if (profile.mainPhoto && updateBody.mainPhoto && profile.mainPhoto.id !== updateBody.mainPhoto.id) {
     filesToDelete.push(profile.mainPhoto.key);
   }
 
