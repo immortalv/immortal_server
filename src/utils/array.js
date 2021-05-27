@@ -1,4 +1,4 @@
-const getDifference = (arr1, arr2) => {
+const getDifference = (arr1 = [], arr2 = []) => {
   const ids = arr1.map(({ id }) => id);
 
   return arr2.reduce((acc, cur) => {
