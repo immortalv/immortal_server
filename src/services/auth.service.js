@@ -86,7 +86,6 @@ const verifyUser = async (verifyToken) => {
     await userService.updateUserById(user.id, { isVerified: true });
     await verifyTokenDoc.remove();
   } catch (error) {
-    console.log('Error', error);
     throw new ApiError(httpStatus.BAD_REQUEST, 'Verify user failed');
   }
 };

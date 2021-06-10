@@ -13,6 +13,11 @@ const createProfile = async (profileBody) => {
   return profile;
 };
 
+/**
+ * Get user profiles
+ * @param {ObjectId} userId
+ * @returns {Promise<[Profile]>}
+ */
 const getProfiles = async (userId) => {
   const profiles = await Profile.find({ userId });
   return profiles;
@@ -21,7 +26,7 @@ const getProfiles = async (userId) => {
 /**
  * Get profile by id
  * @param {ObjectId} id
- * @returns {Promise<User>}
+ * @returns {Promise<Profile>}
  */
 const getProfileById = async (id) => {
   return Profile.findById(id);
@@ -67,10 +72,25 @@ const deleteProfileById = async (profileId) => {
   return profile;
 };
 
+/**
+ * Query for profiles
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const queryProfiles = async (filter, options) => {
+  const profiles = await Profile.paginate(filter, options);
+  return profiles;
+};
+
 module.exports = {
   createProfile,
   getProfiles,
   getProfileById,
   updateProfileById,
   deleteProfileById,
+  queryProfiles,
 };

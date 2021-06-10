@@ -6,6 +6,8 @@ const { profileController } = require('../../controllers');
 
 const router = express.Router();
 
+router.route('/public').get(profileController.getPublicProfiles);
+
 router
   .route('/')
   .post(checkJwt, validate(profileController.createProfile), profileController.createProfile)

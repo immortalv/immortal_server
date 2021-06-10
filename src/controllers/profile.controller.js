@@ -1,6 +1,9 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
+const { PROFILE_TYPES } = require('../config/profile');
+const pick = require('../utils/pick');
+const { toRegex } = require('../utils/string');
 const { profileService } = require('../services');
 
 const createProfile = catchAsync(async (req, res) => {
@@ -33,10 +36,19 @@ const deleteProfile = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const getPublicProfiles = catchAsync(async (req, res) => {
+  const { name = '' } = req.query;
+  const filter = { profileType: PROFILE_TYPES.PUBLIC, name: toRegex(name) };
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await profileService.queryProfiles(filter, options);
+  res.send(result);
+});
+
 module.exports = {
   createProfile,
   getUserProfiles,
   getProfile,
   updateProfile,
   deleteProfile,
+  getPublicProfiles,
 };
