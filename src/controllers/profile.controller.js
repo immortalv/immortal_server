@@ -38,7 +38,8 @@ const deleteProfile = catchAsync(async (req, res) => {
 
 const getPublicProfiles = catchAsync(async (req, res) => {
   const { name = '' } = req.query;
-  const filter = { profileType: PROFILE_TYPES.PUBLIC, name: toRegex(name) };
+  const filter = { profileType: PROFILE_TYPES.PUBLIC, name: toRegex(name, 'ig') };
+
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await profileService.queryProfiles(filter, options);
   res.send(result);
