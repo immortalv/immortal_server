@@ -15,7 +15,7 @@ router
 
 router
   .route('/:id')
-  .get(checkJwt, validate(profileValidation.getProfile), profileController.getProfile)
+  .get(validate(profileValidation.getProfile), profileController.getProfile)
   .patch(checkJwt, validate(profileValidation.updateProfile), profileController.updateProfile)
   .delete(checkJwt, validate(profileValidation.deleteProfile), profileController.deleteProfile);
 
